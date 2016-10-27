@@ -1,5 +1,7 @@
 package se.ltu.monopoly;
 
+import se.ltu.monopoly.chanceCards.ChanceCard;
+
 import java.util.Vector;
 
 /**
