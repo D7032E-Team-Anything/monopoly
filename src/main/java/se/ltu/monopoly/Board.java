@@ -1,5 +1,6 @@
 package se.ltu.monopoly;
 
+import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.chanceCards.ChanceCard;
 
 import java.util.Vector;
