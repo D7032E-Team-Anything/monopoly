@@ -21,9 +21,9 @@ public class Main {
         } else {
 
             Player[] players    = parsePlayers(argv);
-            LTUGameBoard board  = new LTUGameBoard();
+            //LTUGameBoard board  = new LTUGameBoard();
 
-            new Monopoly(board, players, 6);
+            //new Monopoly(board, players, 6);
 
         }
 
