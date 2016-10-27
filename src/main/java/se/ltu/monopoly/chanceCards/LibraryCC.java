@@ -15,9 +15,9 @@ public class LibraryCC extends ChanceCard {
 
         System.out.println(title);
 
-        p.setKnowledge(p.getKnowledge() + 32);
-        p.setPosition(7);
-        p.setSkipOneTurn(true);
+        p.increaseKnowledge(32);
+        p.moveTo(7);
+        p.skipTurn(true);
 
     }
 
