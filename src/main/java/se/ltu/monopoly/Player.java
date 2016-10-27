@@ -1,4 +1,4 @@
-package se.ltu;
+package se.ltu.monopoly;
 
 import java.util.ArrayList;
 

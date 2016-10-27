@@ -1,6 +1,6 @@
 package se.ltu.monopoly;
 
-import se.ltu.Player;
+import se.ltu.monopoly.Player;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -144,13 +144,13 @@ public class LTUMonopoly {
                 } catch (Exception e) {};
                 if ("y".equals(choice)) {
                     if(player.getMoney()-getValueofBoardPosition(pos,2) > 0) {
-                        player.getOwnsTile().add(Integer.valueOf(pos));
+                        player.getOwnsTile().add(pos);
                         player.setMoney(player.getMoney()-getValueofBoardPosition(pos,2));
                         System.out.println(player.getName() + "bought " + getTileNames(pos));
                     }
                 } else {System.out.println("You can not afford " + getTileNames(pos));}
             } else if(checkOwned(pos) == null && player.isComputer() && player.getMoney()-getValueofBoardPosition(pos,2) > 0) {
-                player.getOwnsTile().add(Integer.valueOf(pos));
+                player.getOwnsTile().add(pos);
                 player.setMoney(player.getMoney()-getValueofBoardPosition(pos,2));
                 System.out.println(player.getName() + "bought " + getTileNames(pos));
             }
@@ -215,7 +215,7 @@ public class LTUMonopoly {
 
     public Player checkOwned(int pos) {
         for(int i=0; i< getPlayersCount(); i++) {
-            if(getPlayer(i).getOwnsTile().contains(Integer.valueOf(pos))) {
+            if(getPlayer(i).getOwnsTile().contains(pos)) {
                 return getPlayer(i);
             }
         }
@@ -246,14 +246,14 @@ public class LTUMonopoly {
                 Player owner;
                 owner = checkOwned(12);
                 if(owner != null) {
-                    owner.getOwnsTile().remove(Integer.valueOf(12));
+                    owner.getOwnsTile().remove(12);
                 }
                 owner = checkOwned(13);
                 if(owner != null) {
-                    owner.getOwnsTile().remove(Integer.valueOf(13));
+                    owner.getOwnsTile().remove(13);
                 }
-                player.getOwnsTile().add(Integer.valueOf(12));
-                player.getOwnsTile().add(Integer.valueOf(13));
+                player.getOwnsTile().add(12);
+                player.getOwnsTile().add(13);
                 player.setPosition(12);
                 player.setKnowledge(player.getKnowledge() + getValueofBoardPosition(player.getPosition(),4));
                 break;
