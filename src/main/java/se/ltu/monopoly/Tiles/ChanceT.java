@@ -9,8 +9,8 @@ import se.ltu.monopoly.Player;
 public class ChanceT extends Tile {
 
 
-    public ChanceT(String name, int rent, int knowledge) {
-        super(name, rent, knowledge);
+    public ChanceT(String name) {
+        super(name);
     }
 
     public void doAction(Player p, Board b) {
