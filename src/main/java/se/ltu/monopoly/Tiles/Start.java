@@ -14,6 +14,10 @@ public class Start implements Tile {
 
     }
 
+    public String message() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Start";

@@ -10,4 +10,6 @@ public interface Tile {
 
     void doAction(Player p);
 
+    String message();
+
 }

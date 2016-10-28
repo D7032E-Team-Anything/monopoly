@@ -11,6 +11,10 @@ public class Library implements Tile{
         p.increaseKnowledge(8);
     }
 
+    public String message() {
+        return "";
+    }
+
     @Override
     public String toString() {
         return "Library";

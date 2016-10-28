@@ -7,6 +7,7 @@ import se.ltu.monopoly.Tiles.Tile;
 
 public class Ownable implements Tile {
 
+    private String message = "";
     protected Player owner;
     protected int price, rent;
 
@@ -18,14 +19,32 @@ public class Ownable implements Tile {
     public void doAction(Player p) {
 
         if (owner != null) {
-            p.pay(rent);
-            owner.getPayed(rent);
+
+            boolean success = p.pay(rent);
+
+            message = p.getName() + " paid the rent to " + owner.getName() +
+                    " and has " + p.getMoney() + " study-time left";
+
+            if (success) {
+                owner.getPayed(rent);
+            } else {
+                owner.getPayed(p.getMoney());
+                p.pay(p.getMoney());
+                message = p.getName() + " Could not afford to pay the rent and has lost";
+            }
+
         }
 
     }
 
-    public void buyTile(Player p) {
-        p.buyTile(this);
+    public String message() {
+        return message;
+    }
+
+    public boolean buyTile(Player p) {
+
+        return p.buyTile(this);
+
     }
 
     public int getPrice() {
@@ -37,5 +56,15 @@ public class Ownable implements Tile {
         return owner != null;
 
     }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public int getRent() {
+        return rent;
+    }
+
+
 
 }

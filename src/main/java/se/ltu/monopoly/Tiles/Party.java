@@ -8,7 +8,7 @@ import se.ltu.monopoly.Player;
  */
 public class Party implements Tile{
 
-
+    String message;
     private int pay, knowledge;
 
     public Party(int knowledge, int pay) {
@@ -19,9 +19,18 @@ public class Party implements Tile{
 
     public void doAction(Player p) {
 
-        p.pay(pay);
+        boolean success = p.pay(pay);
+
+        if (!success) {
+            message = p.getName() + " could not afford to pay for the party and has lost";
+        }
+
         p.decreaseKnowledge(knowledge);
 
+    }
+
+    public String message() {
+        return "";
     }
 
     @Override

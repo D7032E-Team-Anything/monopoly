@@ -11,6 +11,12 @@ public class Chance implements Tile {
 
     public void doAction(Player p) {
 
+
+
+    }
+
+    public String message() {
+        return "";
     }
 
     @Override
