@@ -1,13 +1,18 @@
 package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.Tile;
+import se.ltu.monopoly.Tiles.ownable.Ownable;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
  * Created by erikuusitalo on 28/10/16.
  */
 public class Gui {
+
+    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     private Board board;
     private ArrayList<Player> players;
@@ -95,6 +100,19 @@ public class Gui {
         System.out.println("\tEXAM: Win if knowledge >=200 / Skip one turn.");
         System.out.println("\tA209/A210: Attend a workshop [buy: 20, rent 5, Increase knowledge by 4]");
         System.out.println("Win by collecting 200 knowlede and go to the EXAM tile. Lose by running out of study-time");
+    }
+
+    public String wantToBuy(Player player, Ownable tile) {
+        System.out.print("Do you want to buy " + tile.toString() + " for " + tile.getPrice() +
+                " and rent " + tile.getRent() + "? [y/n] \nYou currently have " + player.getMoney() + " study-time\n");
+        String choice = "";
+        try{
+            while(!((choice = bufferedReader.readLine()).equals("y") || choice.equals("n"))){
+                System.out.println("Yes [y] or No [n]");
+            }
+        } catch (Exception e) {};
+
+        return choice;
     }
 
 
