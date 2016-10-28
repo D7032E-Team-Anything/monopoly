@@ -1,6 +1,6 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.ownable.OwnableT;
+import se.ltu.monopoly.Tiles.ownable.Ownable;
 import se.ltu.monopoly.Tiles.Tile;
 
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ public class Player {
 
     private boolean stillPlaying = true;
     private boolean skipTurn;
+    private boolean win = false;
 
     public Player(String name) {
         //Add spaces to make the gameboard printout pretty
@@ -47,18 +48,18 @@ public class Player {
      * @param money is the amont of money to remove
      */
     public void getPayed(int money) {
-        this.money -= money;
+        this.money += money;
     }
 
     public void pay(int money) {
-        this.money += money;
+        this.money -= money;
     }
 
     /**
      *
      * @param tile is the tile to be bought
      */
-    public void buyTile(OwnableT tile) {
+    public void buyTile(Ownable tile) {
         ownedTiles.add(tile);
         this.money -= tile.getPrice();
     }
@@ -69,6 +70,10 @@ public class Player {
      */
     public void moveTo(int position) {
         this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     /**
@@ -111,5 +116,27 @@ public class Player {
         return stillPlaying;
     }
 
+    public int getKnowledge() {
+        return knowledge;
+    }
 
+    public boolean isWin() {
+        return win;
+    }
+
+    public void win() {
+        this.win = true;
+    }
+
+    public boolean isBroke() {
+        return money <= 0;
+    }
+
+    public boolean isComputer() {
+        return computer;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }
