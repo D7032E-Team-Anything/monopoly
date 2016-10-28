@@ -5,19 +5,17 @@ import se.ltu.monopoly.Player;
 import se.ltu.monopoly.Tiles.Tile;
 
 
-public class OwnableT extends Tile {
+public class Ownable implements Tile {
 
     protected Player owner;
-    protected int price, rent, knowledge;
+    protected int price, rent;
 
-    public OwnableT(String name, int rent, int knowledge, int price) {
-        super(name);
+    public Ownable(int rent, int price) {
         this.price = price;
         this.rent = rent;
-        this.knowledge = knowledge;
     }
 
-    public void doAction(Player p, Board b) {
+    public void doAction(Player p) {
 
         if (owner != null) {
             p.pay(rent);
@@ -32,6 +30,12 @@ public class OwnableT extends Tile {
 
     public int getPrice() {
         return this.price;
+    }
+
+    public boolean hasOwner() {
+
+        return owner != null;
+
     }
 
 }
