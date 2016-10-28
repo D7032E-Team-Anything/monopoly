@@ -51,23 +51,50 @@ public class Player {
         this.money += money;
     }
 
-    public void pay(int money) {
-        this.money -= money;
+    public boolean pay(int pay) {
+
+        if (money - pay < 0) {
+            lose(true);
+            return false;
+        }
+
+        this.money -= pay;
+        return true;
+
     }
 
     /**
      *
      * @param tile is the tile to be bought
+     * @return true if buy is successful, false otherwise
      */
-    public void buyTile(Ownable tile) {
+    public boolean buyTile(Ownable tile) {
+
+        if (money - tile.getPrice() < 0) {
+            return false;
+        }
+
         ownedTiles.add(tile);
         this.money -= tile.getPrice();
+
+        return true;
     }
 
     /**
      *
-     * @param position is position to be moved to
+     * @param position
      */
+    public void move(int position) {
+
+        this.position += position;
+
+        if(this.position > 13) {
+            this.position -= 14;
+        }
+
+
+    }
+
     public void moveTo(int position) {
         this.position = position;
     }
@@ -138,5 +165,13 @@ public class Player {
 
     public int getMoney() {
         return money;
+    }
+
+    public boolean isSkipTurn() {
+        return skipTurn;
+    }
+
+    public String getStatus() {
+        return this.name + " has " + this.money + " study-time and " + this.knowledge + " knowledge";
     }
 }
