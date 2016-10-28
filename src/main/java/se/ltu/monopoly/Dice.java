@@ -14,7 +14,7 @@ public class Dice {
     public Dice(int sides) {
 
         if (sides <= 0) {
-            throw new IllegalArgumentException("Age cannot be negative.");
+            throw new IllegalArgumentException("Sides cannot be negative or zero.");
         }
 
         this.sides = sides;

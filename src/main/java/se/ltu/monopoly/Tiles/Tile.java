@@ -1,22 +1,19 @@
 package se.ltu.monopoly.Tiles;
 
 import se.ltu.monopoly.Board;
-import se.ltu.monopoly.Player;
+import se.ltu.monopoly.NewPlayer;
 
-/**
- * Created by haidar on 2016-10-27.
- */
-public abstract class Tile {
 
-    private String name;
+public interface Tile {
+    public void stepInside(NewPlayer p, Board b);
 
-    public Tile(String name) {
-        this.name = name;
-    }
-
-    public abstract void doAction(Player p, Board b);
-
-    public String getName() {
-        return name;
-    }
+    public int      getGetOrPay();
+    public int      getBuyCoast();
+    public int      getRentCoast();
+    public int      getKnowledge();
+    public int      getOwner();
+    public boolean  isOwnable();
+    public boolean  isChanceTile();
+    public String   getName();
+    public void     setOwner(int owner);
 }
