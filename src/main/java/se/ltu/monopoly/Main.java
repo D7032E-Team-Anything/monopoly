@@ -1,5 +1,7 @@
 package se.ltu.monopoly;
 
+import java.util.Vector;
+
 /**
  * Created by haidar on 2016-10-27.
  */
@@ -20,10 +22,9 @@ public class Main {
 
         } else {
 
-            Player[] players    = parsePlayers(argv);
-            //LTUGameBoard board  = new LTUGameBoard();
-
-            //new Monopoly(board, players, 6);
+            Board b = new Board();
+            b.setmPlayers(parsePlayers(argv));
+            b.setmDice(new Dice(6));
 
         }
 
@@ -32,19 +33,19 @@ public class Main {
     /**
      *
      * @param playerNames
-     * @return list of players
+     * @return vector of players
      */
-    private static Player[] parsePlayers(String[] playerNames) {
+    private static Vector<Player> parsePlayers(String[] playerNames) {
 
-        Player[] players    = new Player[4];
+        Vector<Player> players = new Vector<Player>();
 
         int computerID = 1;
         for(int i=0; i<4; i++) {
             if(playerNames.length >= (i+1)) {
-                players[i] = new Player(playerNames[i]);
+                players.add(new Player(playerNames[i]));
             } else {
                 //C.1 = computer 1, etc.
-                players[i] = new Player("C." + computerID, true);
+                players.add(new Player("C." + computerID, true));
                 computerID++;
             }
         }

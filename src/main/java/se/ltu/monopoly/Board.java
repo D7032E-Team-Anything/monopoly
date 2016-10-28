@@ -14,6 +14,12 @@ public class Board {
     private Vector<Tile> mTiles;
     private Vector<ChanceCard> mChanceCards;
 
+    public void start() {
+
+        // TODO: 28/10/16 Start board
+
+    }
+
     public Dice getmDice() {
         return mDice;
     }
