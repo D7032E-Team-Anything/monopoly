@@ -6,8 +6,8 @@ import se.ltu.monopoly.Player;
 /**
  * Created by haidar on 2016-10-27.
  */
-public abstract class ChanceCard {
+public interface ChanceCard {
 
-    public abstract void onAction(Player p, Board b);
+    void onAction(Player p, Board b);
 
 }
