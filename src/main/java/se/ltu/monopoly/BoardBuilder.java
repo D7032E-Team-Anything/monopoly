@@ -7,7 +7,7 @@ import se.ltu.monopoly.chanceCards.ChanceCardFactory;
 import java.util.ArrayList;
 
 
-public class BoardConstructor {
+public class BoardBuilder {
 
     Board board;
 
@@ -15,11 +15,6 @@ public class BoardConstructor {
     private ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Tile> tiles = new ArrayList<Tile>();
     private ArrayList<ChanceCard> chanceCards = new ArrayList<ChanceCard>();
-
-
-    public BoardConstructor() {
-
-    }
 
     public void setDice(int sides) {
         dice = new Dice(sides);
@@ -56,6 +51,10 @@ public class BoardConstructor {
 
         }
 
+    }
+
+    public void setTiles(ArrayList<Tile> tiles) {
+        this.tiles = tiles;
     }
 
     public Board createBoard() {
