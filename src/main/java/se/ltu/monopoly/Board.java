@@ -1,6 +1,7 @@
 package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.Tile;
+import se.ltu.monopoly.Tiles.ownable.Ownable;
 import se.ltu.monopoly.chanceCards.ChanceCard;
 
 import java.io.BufferedReader;
@@ -17,16 +18,16 @@ public class Board {
     private ArrayList<Player> players;
     private ArrayList<Tile> tiles;
     private ArrayList<ChanceCard> chanceCards;
-    private Dice mDice;
+    private Dice dice;
     private Gui gui;
 
     private boolean gameEnd = false;
 
-    public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, ArrayList<ChanceCard> mChanceCards, Dice mDice) {
+    public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, ArrayList<ChanceCard> mChanceCards, Dice dice) {
         this.players = mPlayers;
         this.tiles = mTiles;
         this.chanceCards = mChanceCards;
-        this.mDice = mDice;
+        this.dice = dice;
         this.gui = new Gui(this, players);
     }
 
@@ -64,10 +65,17 @@ public class Board {
 				* Property can not be sold once bought
 		*/
 
-
+        // Check if still playing
         if(!player.isStillPlaying()) {
             gameEnd = isSomeonePlaying();
             if(gameEnd) System.out.println("There are no more players, everyone lost");
+            return;
+        }
+
+        // Player skip turn
+        if(player.isSkipTurn()) {
+            player.skipTurn(false);
+            System.out.println(player.getName() + " skips one turn");
             return;
         }
 
@@ -75,7 +83,6 @@ public class Board {
 
         // Player character - let them press enter before their turn begins.
         if(!player.isComputer()) {
-            //Print the game-board for player characters.
             gui.paintGameBoard();
             System.out.println(player.getName() + "Press [enter] to continue. (study-time: "+
                     player.getMoney()+", knowledge: " + player.getKnowledge()+ ")");
@@ -83,6 +90,66 @@ public class Board {
                 bufferedReader.readLine();
             } catch(Exception e){};
         }
+
+
+        // What to buy?
+        int currentPos   = player.getPosition();
+        Tile currentTile = tiles.get(currentPos);
+
+        if (currentTile instanceof Ownable) {
+
+            Ownable ownableTile = (Ownable) currentTile;
+
+            if ( !ownableTile.hasOwner() && !player.isComputer()) {
+
+                String answer = gui.wantToBuy(player, ownableTile);
+
+                if(answer.equals("y")) {
+
+                    if (ownableTile.buyTile(player)) {
+
+                        System.out.println(player.getName() + "bought " + ownableTile.toString());
+
+                    } else {
+
+                        System.out.println("You can not afford " + ownableTile.toString());
+
+                    }
+
+                }
+
+            }
+            else if(!ownableTile.hasOwner() && player.isComputer()) {
+                ownableTile.buyTile(player);
+            }
+
+        }
+
+
+
+
+        // Roll dice
+        int roll = dice.roll();
+        player.move(roll);
+
+        currentTile = tiles.get(player.getPosition());
+        System.out.println(player.getName() + "rolls a " + roll + " and lands on " + currentTile.toString());
+
+        // Execute tile action
+        currentTile.doAction(player);
+
+        System.out.println(currentTile.message());
+
+
+        System.out.println(player.getStatus());
+
+
+
+
+
+
+
+
 
 
 
