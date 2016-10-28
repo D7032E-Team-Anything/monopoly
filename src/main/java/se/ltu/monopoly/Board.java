@@ -2,53 +2,33 @@ package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.chanceCards.ChanceCard;
+import se.ltu.monopoly.chanceCards.ChanceCardFactory;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
  * Created by haidar on 2016-10-27.
  */
 public class Board {
+
+    private ArrayList<Player> players;
+    private ArrayList<Tile> tiles;
+    private ArrayList<ChanceCard> chanceCards;
     private Dice mDice;
-    private Vector<Player> mPlayers;
-    private Vector<Tile> mTiles;
-    private Vector<ChanceCard> mChanceCards;
 
-    public void start() {
-
-        // TODO: 28/10/16 Start board
-
-    }
-
-    public Dice getmDice() {
-        return mDice;
-    }
-
-    public void setmDice(Dice mDice) {
+    public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, ArrayList<ChanceCard> mChanceCards, Dice mDice) {
+        this.players = mPlayers;
+        this.tiles = mTiles;
+        this.chanceCards = mChanceCards;
         this.mDice = mDice;
     }
 
-    public Vector<Player> getmPlayers() {
-        return mPlayers;
+    public void start() {
+
+        chanceCards.get(0).onAction(players.get(0), this);
+
     }
 
-    public void setmPlayers(Vector<Player> mPlayers) {
-        this.mPlayers = mPlayers;
-    }
 
-    public Vector<Tile> getmTiles() {
-        return mTiles;
-    }
-
-    public void setmTiles(Vector<Tile> mTiles) {
-        this.mTiles = mTiles;
-    }
-
-    public Vector<ChanceCard> getmChanceCards() {
-        return mChanceCards;
-    }
-
-    public void setmChanceCards(Vector<ChanceCard> mChanceCards) {
-        this.mChanceCards = mChanceCards;
-    }
 }
