@@ -1,13 +1,19 @@
 package se.ltu.monopoly.Tiles.ownable;
 
-/**
- * Created by erikuusitalo on 28/10/16.
- */
+import se.ltu.monopoly.Board;
+import se.ltu.monopoly.Player;
+
+
 public class Stil extends Ownable {
 
 
-    public Stil(int rent, int price) {
-        super(rent, price);
+    public Stil(int position, String name, int rent, int price) {
+        super(position, name, rent, price);
+    }
+
+    @Override
+    public void onAction(Player p, Board b) {
+        super.onAction(p, b);
     }
 
     @Override

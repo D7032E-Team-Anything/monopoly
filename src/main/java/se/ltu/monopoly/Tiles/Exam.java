@@ -4,13 +4,18 @@ import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
 
-/**
- * Created by erikuusitalo on 27/10/16.
- */
-public class Exam implements Action{
+
+public class Exam implements Action, Tile{
 
 
     String message;
+    private String name;
+    private int position;
+
+    public Exam(int position, String name){
+        this.position = position;
+        this.name = name;
+    }
 
     public void onAction(Player p, Board b) {
 
@@ -35,4 +40,11 @@ public class Exam implements Action{
         return "Exam";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

@@ -4,10 +4,16 @@ import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
 
-/**
- * Created by erikuusitalo on 28/10/16.
- */
-public class Library implements Action{
+
+public class Library implements Action, Tile{
+
+    private String name;
+    private int position;
+
+    public Library(int position, String name){
+        this.position = position;
+        this.name = name;
+    }
 
     public void onAction(Player p, Board b) {
         p.increaseKnowledge(8);
@@ -22,4 +28,11 @@ public class Library implements Action{
         return "Library";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

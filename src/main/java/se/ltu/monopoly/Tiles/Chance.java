@@ -7,12 +7,17 @@ import se.ltu.monopoly.chanceCards.ChanceCard;
 
 import java.util.Random;
 
-/**
- * Created by erikuusitalo on 27/10/16.
- */
-public class Chance implements Action{
+
+public class Chance implements Action, Tile{
 
     private String message;
+    private String name;
+    private int position;
+
+    public Chance(int position, String name){
+        this.position = position;
+        this.name = name;
+    }
 
     public void onAction(Player p, Board b) {
 
@@ -59,4 +64,11 @@ public class Chance implements Action{
         return "Chance";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

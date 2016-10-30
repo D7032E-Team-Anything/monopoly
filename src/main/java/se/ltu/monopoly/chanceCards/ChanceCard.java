@@ -3,6 +3,7 @@ package se.ltu.monopoly.chanceCards;
 import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
+import se.ltu.monopoly.Tiles.ownable.Ownable;
 
 /**
  * Created by haidar on 2016-10-30.
@@ -34,7 +35,6 @@ public class ChanceCard implements Action { // case 0
                     "any study-time";
 
             p.moveTo(0);
-            p.decreaseMoney(40);
         }
         public String message() {
             return message;
@@ -71,9 +71,9 @@ public class ChanceCard implements Action { // case 0
             b.removeOwner("A209");
             b.removeOwner("A210");
 
-            p.gainTile(b.getTile(12));
-            p.gainTile(b.getTile(13));
-
+            p.gainTile((Ownable) b.getTile(12));
+            p.gainTile((Ownable) b.getTile(13));
+            ((Action) b.getTile(12)).onAction(p,b);
             p.moveTo(12);
 
         }
@@ -127,12 +127,6 @@ public class ChanceCard implements Action { // case 0
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public Action getAction() {
-        return action;
-    }
-    public void setAction(Action action) {
-        this.action = action;
     }
 
     public void onAction (Player p, Board b) {

@@ -25,7 +25,7 @@ public class Dice {
      */
     public int roll() {
 
-         return random.nextInt((sides - 1) + 1) + 1;
+        return random.nextInt((sides - 1) + 1) + 1;
 
     }
 

@@ -4,16 +4,18 @@ import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
 
-/**
- * Created by erikuusitalo on 27/10/16.
- */
-public class Party implements Action{
+
+public class Party implements Action, Tile{
 
     String message;
+    private String name;
+    private int position;
     private int pay, knowledge;
 
-    public Party(int knowledge, int pay) {
+    public Party(int position, String name,int knowledge, int pay) {
 
+        this.position = position;
+        this.name = name;
         this.knowledge = knowledge;
         this.pay = pay;
     }
@@ -39,4 +41,11 @@ public class Party implements Action{
         return "Party";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

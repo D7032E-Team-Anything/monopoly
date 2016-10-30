@@ -6,18 +6,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-/**
- * Created by erikuusitalo on 28/10/16.
- */
+
 public class Gui {
 
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    private Board board;
     private ArrayList<Player> players;
 
-    public Gui(Board board, ArrayList<Player> players) {
-        this.board = board;
+    public Gui(ArrayList<Player> players) {
+
         this.players = players;
     }
 

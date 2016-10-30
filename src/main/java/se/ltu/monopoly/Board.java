@@ -1,5 +1,6 @@
 package se.ltu.monopoly;
 
+import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.Tiles.ownable.Ownable;
 
 import java.io.BufferedReader;
@@ -14,19 +15,17 @@ public class Board {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     private ArrayList<Player> players;
-    private ArrayList<Action> tiles;
-    private ArrayList<Action> chanceCards;
+    private ArrayList<Tile> tiles;
     private Dice dice;
     private Gui gui;
 
     private boolean gameEnd = false;
 
-    public Board(ArrayList<Player> mPlayers, ArrayList<Action> mTiles, ArrayList<Action> mChanceCards, Dice dice) {
+    public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, Dice dice) {
         this.players = mPlayers;
         this.tiles = mTiles;
-        this.chanceCards = mChanceCards;
         this.dice = dice;
-        this.gui = new Gui(this, players);
+        this.gui = new Gui(players);
     }
 
     public void start() {
@@ -47,6 +46,7 @@ public class Board {
         }
 
     }
+
 
     private void makeMove(Player player) {
 
@@ -92,13 +92,14 @@ public class Board {
 
         // What to buy?
         int currentPos   = player.getPosition();
-        Action currentTile = tiles.get(currentPos);
+
+        Tile currentTile = tiles.get(currentPos);
 
         if (currentTile instanceof Ownable) {
 
             Ownable ownableTile = (Ownable) currentTile;
 
-            if ( !ownableTile.hasOwner() && !player.isComputer()) {
+            if (!ownableTile.hasOwner() && !player.isComputer()) {
 
                 String answer = gui.wantToBuy(player, ownableTile);
 
@@ -134,13 +135,14 @@ public class Board {
         System.out.println(player.getName() + "rolls a " + roll + " and lands on " + currentTile.toString());
 
         // Execute tile action
-        currentTile.onAction(player, this);
+        Action currentAction = (Action) currentTile;
 
-        System.out.println(currentTile.message());
+        currentAction.onAction(player, this);
+
+        System.out.println(currentAction.message());
 
 
         System.out.println(player.getStatus());
-
 
     }
 
@@ -154,8 +156,8 @@ public class Board {
         }
         return someoneIsStillPlaying;
     }
-    public void removeOwner(String roomName){
 
+    public void removeOwner(String roomName){
         for(Player p : players){
             if(p.ownsTile(roomName)){
                p.removeTile(roomName);
@@ -164,14 +166,8 @@ public class Board {
         }
     }
 
-    // crazy fix
-    public Ownable getTile(int pos){
-        Action tile = tiles.get(pos);
-
-        if (tile instanceof Ownable){
-            return (Ownable) tile;
-        }
-        return null;
+    public Tile getTile(int pos){
+        return tiles.get(pos);
     }
 
 

@@ -3,16 +3,21 @@ package se.ltu.monopoly.Tiles.ownable;
 import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
+import se.ltu.monopoly.Tiles.Tile;
 
 
-public class Ownable implements Action {
+public class Ownable implements Action, Tile {
 
     private String      message;
     protected Player    owner;
     protected int       price;
     protected int       rent;
+    protected String    name;
+    protected int       position;
 
-    public Ownable(int rent, int price) {
+    public Ownable(int position, String name,int rent, int price) {
+        this.position = position;
+        this.name = name;
         this.price = price;
         this.rent = rent;
     }
@@ -67,5 +72,11 @@ public class Ownable implements Action {
     }
 
 
+    public String getName() {
+        return name;
+    }
 
+    public int getPosition() {
+        return position;
+    }
 }

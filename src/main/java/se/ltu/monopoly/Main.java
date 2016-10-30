@@ -29,21 +29,21 @@ public class Main {
         // board settings
         BoardBuilder bb = new BoardBuilder();
         bb.setPlayers(argv);
-        bb.setTiles(new ArrayList<Action>() {{
-            add(new Start());
-            add(new Stil(2,6));
-            add(new Chance());
-            add(new Philm(2,6));
-            add(new Party(8, 18));
-            add(new Classroom("A109", 3, 3, 10));
-            add(new Classroom("A117", 3, 3, 10));
-            add(new Library());
-            add(new Classroom("B234Ske", 3, 3, 10));
-            add(new Chance());
-            add(new Classroom("E632", 3, 3, 10));
-            add(new Exam());
-            add(new Classroom("A209", 5, 4, 20));
-            add(new Classroom("A210", 5, 4, 20));
+        bb.setTiles(new ArrayList<Tile>() {{
+            add(new Start       (0, "Start"));
+            add(new Stil        (1, "Stil"   ,2,6));
+            add(new Chance      (2, "Chance"));
+            add(new Philm       (3, "Philm"  ,2,6));
+            add(new Party       (4, "Party"  ,8, 18));
+            add(new Classroom   (5, "A109", 3, 3, 10));
+            add(new Classroom   (6, "A117", 3, 3, 10));
+            add(new Library     (7, "Library"));
+            add(new Classroom   (8, "B234Ske", 3, 3, 10));
+            add(new Chance      (9, "Chance"));
+            add(new Classroom   (10,"E632", 3, 3, 10));
+            add(new Exam        (11,"Exam"));
+            add(new Classroom   (12,"A209", 5, 4, 20));
+            add(new Classroom   (13,"A210", 5, 4, 20));
         }});
         bb.setDice(6);
 

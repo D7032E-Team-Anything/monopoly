@@ -9,26 +9,28 @@ public class Player {
 
     private String name;
     private int position;
-    private int money = 200;
+    private int money;
     private int knowledge;
 
     private boolean computer;
-
-    private ArrayList<Ownable> ownedTiles = new ArrayList<Ownable>();
-
-    private boolean stillPlaying = true;
+    private boolean stillPlaying;
     private boolean skipTurn;
-    private boolean win = false;
+
+    private ArrayList<Ownable> ownedTiles;
+
+
 
     public Player(String name) {
-        //Add spaces to make the gameboard printout pretty
-        this.name = "   " + name + "   ";
+        this(name, false);
     }
 
     public Player(String name, boolean computer) {
-        //Add spaces to make the gameboard printout pretty
-        this.name = "   " + name + "   ";
-        this.computer = computer;
+
+        this.name           = "   " + name + "   ";
+        this.computer       = computer;
+        this.stillPlaying   = true;
+        this.ownedTiles     = new ArrayList<Ownable>();
+        this.money          = 200;
     }
 
     /**
