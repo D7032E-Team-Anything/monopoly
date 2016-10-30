@@ -11,14 +11,10 @@ public class Player {
     private int position;
     private int money;
     private int knowledge;
-
     private boolean computer;
     private boolean stillPlaying;
     private boolean skipTurn;
-
     private ArrayList<Ownable> ownedTiles;
-
-
 
     public Player(String name) {
         this(name, false);
@@ -53,6 +49,11 @@ public class Player {
         this.money += money;
     }
 
+    /**
+     *
+     * @param pay is the amount to pay
+     * @return true if payment was successful, false otherwise
+     */
     public boolean pay(int pay) {
 
         if (money - pay < 0) {
@@ -80,6 +81,7 @@ public class Player {
         this.money -= tile.getPrice();
 
         return true;
+
     }
 
     /**
@@ -91,9 +93,10 @@ public class Player {
         ownedTiles.add(tile);
     }
 
+
     /**
      *
-     * @param steps
+     * @param steps is steps to move forward
      */
     public void move(int steps) {
 
@@ -103,16 +106,22 @@ public class Player {
             this.position -= 14;
         }
 
-
     }
 
+    /**
+     *
+     * @param name of tile
+     * @return true if player owns tile, false otherwise
+     */
     public boolean ownsTile(String name){
+
         for(Ownable t : ownedTiles){
             if(t.toString().equals(name)){
                 return true;
             }
         }
         return false;
+
     }
 
     /**
@@ -129,80 +138,52 @@ public class Player {
         }
     }
 
+    /**
+     *
+     * @return string representing the status of the player
+     */
+    public String getStatus() {
+        return this.name + " has " + this.money + " study-time and " + this.knowledge + " knowledge";
+    }
+
+    public void increaseKnowledge(int knowledge) {
+        this.knowledge += knowledge;
+    }
+    public void decreaseKnowledge(int knowledge) {
+        this.knowledge -= knowledge;
+    }
+    public void decreaseMoney(int money) {
+        this.money -= money;
+    }
+    public void skipTurn(boolean skipTurn) {
+        this.skipTurn = skipTurn;
+    }
     public void moveTo(int position) {
         this.position = position;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     *
-     * @param knowledge is amount of knowledge to increase
-     */
-    public void increaseKnowledge(int knowledge) {
-        this.knowledge += knowledge;
-    }
-
-    /**
-     *
-     * @param knowledge is amount of knowledge to be removed
-     */
-    public void decreaseKnowledge(int knowledge) {
-        this.knowledge -= knowledge;
-    }
-
-    /**
-     *
-     * @param money is amount of money to be removed
-     */
-    public void decreaseMoney(int money) {
-        this.money -= money;
-    }
-
-    /**
-     *
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     *
-     * @param skipTurn true if player should skip a turn, false to continue playing
-     */
-    public void skipTurn(boolean skipTurn) {
-        this.skipTurn = skipTurn;
-    }
-
-    /**
-     *
-     * @return true if player is still playing
-     */
     public boolean isStillPlaying() {
         return stillPlaying;
+    }
+    public boolean isComputer() {
+        return computer;
+    }
+    public boolean isSkipTurn() {
+        return skipTurn;
     }
 
     public int getKnowledge() {
         return knowledge;
     }
-
-
-    public boolean isComputer() {
-        return computer;
+    public String getName() {
+        return name;
     }
-
+    public int getPosition() {
+        return position;
+    }
     public int getMoney() {
         return money;
     }
 
-    public boolean isSkipTurn() {
-        return skipTurn;
-    }
 
-    public String getStatus() {
-        return this.name + " has " + this.money + " study-time and " + this.knowledge + " knowledge";
-    }
 }

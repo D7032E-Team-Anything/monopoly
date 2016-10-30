@@ -6,6 +6,21 @@ import se.ltu.monopoly.Tiles.ownable.Ownable;
 
 public class ChanceCard implements Action { // case 0
 
+    /**
+     * All chance cards are structured as followed
+     *  1. Action: contains an action that effects the player or board in some way
+     *  2. Message: message that will be displayed to the user
+     */
+
+    private String name;
+    private Action action;
+
+
+    public ChanceCard(String name, Action action) {
+        super();
+        this.name = name;
+        this.action = action;
+    }
 
     static public class StudyAtLibrary implements Action {
         private String message;
@@ -103,31 +118,17 @@ public class ChanceCard implements Action { // case 0
         }
     }
 
-    private String name;
-    private Action action;
-
-
-    public ChanceCard(String name, Action action) {
-        super();
-        this.name = name;
-        this.action = action;
-    }
-
-    public void move(Player p, Board b) {
-        action.onAction(p, b);
-    }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
     }
-
     public void onAction (Player p, Board b) {
         action.onAction(p, b);
     }
-
     public String message() {
         return action.message();
     }
+
 }

@@ -10,14 +10,15 @@ import java.util.ArrayList;
 public class Gui {
 
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
     private ArrayList<Player> players;
 
     public Gui(ArrayList<Player> players) {
-
         this.players = players;
     }
 
+    /**
+     * Paints the game board
+     */
     public void paintGameBoard() {
 
         String[][] boardTiles = new String[16][];
@@ -84,6 +85,9 @@ public class Gui {
         }
     }
 
+    /**
+     * Paints game instructions
+     */
     public void printInstructions() {
         System.out.println("Currency: Study-time (Time is money, start with 200)");
         System.out.println("Tiles:");
@@ -98,6 +102,13 @@ public class Gui {
         System.out.println("Win by collecting 200 knowlede and go to the EXAM tile. Lose by running out of study-time");
     }
 
+
+    /**
+     *
+     * @param player
+     * @param tile
+     * @return return true if player wants to buy, false otherwise
+     */
     public String wantToBuy(Player player, Ownable tile) {
         System.out.print("Do you want to buy " + tile.toString() + " for " + tile.getPrice() +
                 " and rent " + tile.getRent() + "? [y/n] \nYou currently have " + player.getMoney() + " study-time\n");

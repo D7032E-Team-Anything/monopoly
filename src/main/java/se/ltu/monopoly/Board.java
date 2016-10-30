@@ -13,12 +13,10 @@ import java.util.ArrayList;
 public class Board {
 
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
     private ArrayList<Player> players;
     private ArrayList<Tile> tiles;
     private Dice dice;
     private Gui gui;
-
     private boolean gameEnd = false;
 
     public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, Dice dice) {
@@ -34,34 +32,17 @@ public class Board {
 
         int i = 0;
         while (!isGameEnd()) {
-
-
             makeMove(players.get(i));
-
             i++;
             if(i>=players.size()) {
                 i=0;
             }
-
         }
 
     }
 
 
     private void makeMove(Player player) {
-
-        /*
-			Rules:
-				* 1. In the beginning of your turn you may opt to buy unowned property
-				* 2. Roll d6 dice and move that number of steps.
-				* 3. If the tile you land on is owned, pay the rent
-				* 4. Increase or decrease your knowledge accordingly.
-				* 5. Pay any costs involved in arriving to the tile (e.g. PARTY)
-				* 6. Draw a Chance card on the CHANCE tile and follow the text
-				* exit 1. Lose the game if you are all out of study-time
-				* exit 2. Win the game if you have >= 200 knowledge and stand at EXAM
-				* Property can not be sold once bought
-		*/
 
         // Check if still playing
         if(!player.isStillPlaying()) {
@@ -88,7 +69,6 @@ public class Board {
                 bufferedReader.readLine();
             } catch(Exception e){};
         }
-
 
         // What to buy?
         int currentPos   = player.getPosition();
@@ -124,29 +104,26 @@ public class Board {
 
         }
 
-
-
-
         // Roll dice
         int roll = dice.roll();
         player.move(roll);
-
         currentTile = tiles.get(player.getPosition());
         System.out.println(player.getName() + "rolls a " + roll + " and lands on " + currentTile.toString());
 
         // Execute tile action
         Action currentAction = (Action) currentTile;
-
         currentAction.onAction(player, this);
-
         System.out.println(currentAction.message());
 
-
+        // Print status of player
         System.out.println(player.getStatus());
 
     }
 
-
+    /**
+     *
+     * @return true if someone is still playing, false otherwise
+     */
     private boolean isSomeonePlaying() {
         boolean someoneIsStillPlaying = false;
         for(Player p : players) {
@@ -157,6 +134,10 @@ public class Board {
         return someoneIsStillPlaying;
     }
 
+    /**
+     * Used to remove owner of specified room
+     * @param roomName is room name to be removed
+     */
     public void removeOwner(String roomName){
         for(Player p : players){
             if(p.ownsTile(roomName)){
@@ -169,13 +150,11 @@ public class Board {
     public Tile getTile(int pos){
         return tiles.get(pos);
     }
-
-
     public boolean isGameEnd() {
         return gameEnd;
     }
-
     public void setGameEnd(boolean gameEnd) {
         this.gameEnd = gameEnd;
     }
+
 }
