@@ -7,7 +7,7 @@ import se.ltu.monopoly.Player;
 /**
  * Created by erikuusitalo on 27/10/16.
  */
-public class Exam implements Action {
+public class Exam implements Action{
 
 
     String message;

@@ -10,10 +10,12 @@ import java.util.Random;
 /**
  * Created by erikuusitalo on 27/10/16.
  */
-public class Chance implements Action {
+public class Chance implements Action{
 
+    private String message;
 
     public void onAction(Player p, Board b) {
+
 
         int card = new Random().nextInt(5);
         Action action;
@@ -21,22 +23,27 @@ public class Chance implements Action {
             case 0:
                 action = new ChanceCard("StudyAtLibrary", new ChanceCard.StudyAtLibrary());
                 action.onAction(p, b);
+                message = action.message();
                 break;
             case 1:
                 action = new ChanceCard("FallenIll", new ChanceCard.FallenIll());
                 action.onAction(p, b);
+                message = action.message();
                 break;
             case 2:
                 action = new ChanceCard("GotanExam", new ChanceCard.GotanExam());
                 action.onAction(p, b);
+                message = action.message();
                 break;
             case 3:
                 action = new ChanceCard("PWNZ", new ChanceCard.PWNZ());
                 action.onAction(p, b);
+                message = action.message();
                 break;
             case 4:
                 action = new ChanceCard("Party", new ChanceCard.Party());
                 action.onAction(p, b);
+                message = action.message();
                 break;
         }
 
@@ -44,11 +51,12 @@ public class Chance implements Action {
     }
 
     public String message() {
-        return "";
+        return message;
     }
 
     @Override
     public String toString() {
         return "Chance";
     }
+
 }
