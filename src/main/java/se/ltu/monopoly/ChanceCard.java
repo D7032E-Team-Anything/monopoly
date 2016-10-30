@@ -1,13 +1,9 @@
-package se.ltu.monopoly.chanceCards;
+package se.ltu.monopoly;
 
-import se.ltu.monopoly.Action;
-import se.ltu.monopoly.Board;
-import se.ltu.monopoly.Player;
+
 import se.ltu.monopoly.Tiles.ownable.Ownable;
 
-/**
- * Created by haidar on 2016-10-30.
- */
+
 public class ChanceCard implements Action { // case 0
 
 
@@ -21,7 +17,6 @@ public class ChanceCard implements Action { // case 0
             p.moveTo(7);
             p.skipTurn(true);
         }
-
         public String message() {
             return message;
         }
@@ -33,7 +28,6 @@ public class ChanceCard implements Action { // case 0
         public void onAction (Player p, Board b) {
             message = "has fallen ill. Go to START without collecting " +
                     "any study-time";
-
             p.moveTo(0);
         }
         public String message() {

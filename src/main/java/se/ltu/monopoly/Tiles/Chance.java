@@ -3,7 +3,7 @@ package se.ltu.monopoly.Tiles;
 import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
-import se.ltu.monopoly.chanceCards.ChanceCard;
+import se.ltu.monopoly.ChanceCard;
 
 import java.util.Random;
 
