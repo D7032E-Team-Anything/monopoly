@@ -15,9 +15,7 @@ public class Start implements Action, Tile{
         this.name = name;
     }
     public void onAction(Player p, Board b) {
-
         p.getPayed(40);
-
     }
 
     public String message() {

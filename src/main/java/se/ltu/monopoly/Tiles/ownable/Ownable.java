@@ -15,6 +15,14 @@ public class Ownable implements Action, Tile {
     protected String    name;
     protected int       position;
 
+    /**
+     * The Onable class represent a tile that can be owned by a player.
+     * @param position ownable tile position
+     * @param name     ownable tile name
+     * @param rent     the cost of renting this tile
+     * @param price    the cost to purchase this tile
+     * */
+
     public Ownable(int position, String name,int rent, int price) {
         this.position = position;
         this.name = name;
@@ -48,9 +56,7 @@ public class Ownable implements Action, Tile {
     }
 
     public boolean buyTile(Player p) {
-
         return p.buyTile(this);
-
     }
 
     public int getPrice() {
@@ -58,19 +64,12 @@ public class Ownable implements Action, Tile {
     }
 
     public boolean hasOwner() {
-
         return owner != null;
-
-    }
-
-    public Player getOwner() {
-        return owner;
     }
 
     public int getRent() {
         return rent;
     }
-
 
     public String getName() {
         return name;

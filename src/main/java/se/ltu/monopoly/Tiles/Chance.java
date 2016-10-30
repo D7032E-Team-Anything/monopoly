@@ -14,13 +14,19 @@ public class Chance implements Action, Tile{
     private String name;
     private int position;
 
+    /**
+     * This tile represent a chance tile. When a player land on a chance
+     * tile, a random car is selected and executed
+     *
+     * @param position chance tile position
+     * @param name     chance tile name
+     * */
     public Chance(int position, String name){
         this.position = position;
         this.name = name;
     }
 
     public void onAction(Player p, Board b) {
-
 
         int card = new Random().nextInt(5);
         Action action;
@@ -51,8 +57,6 @@ public class Chance implements Action, Tile{
                 message = action.message();
                 break;
         }
-
-
     }
 
     public String message() {

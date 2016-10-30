@@ -33,7 +33,7 @@ public class Party implements Action, Tile{
     }
 
     public String message() {
-        return "";
+        return message;
     }
 
     @Override

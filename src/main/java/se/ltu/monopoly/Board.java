@@ -7,9 +7,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-/**
- * Created by haidar on 2016-10-27.
- */
 public class Board {
 
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
