@@ -1,12 +1,13 @@
 package se.ltu.monopoly.Tiles;
 
+import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
 
 /**
  * Created by erikuusitalo on 27/10/16.
  */
-public class Party implements Tile{
+public class Party implements Action{
 
     String message;
     private int pay, knowledge;
@@ -17,7 +18,7 @@ public class Party implements Tile{
         this.pay = pay;
     }
 
-    public void doAction(Player p) {
+    public void onAction(Player p, Board b) {
 
         boolean success = p.pay(pay);
 

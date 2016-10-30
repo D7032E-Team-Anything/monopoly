@@ -1,6 +1,5 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.Tiles.ownable.Ownable;
 
 import java.io.BufferedReader;

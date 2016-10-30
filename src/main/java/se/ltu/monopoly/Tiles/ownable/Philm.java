@@ -13,8 +13,8 @@ public class Philm extends Ownable {
     }
 
     @Override
-    public void doAction(Player p) {
-        super.doAction(p);
+    public void onAction(Player p, Board b) {
+        super.onAction(p, b);
     }
 
     @Override

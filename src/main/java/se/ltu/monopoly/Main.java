@@ -29,10 +29,7 @@ public class Main {
         // board settings
         BoardBuilder bb = new BoardBuilder();
         bb.setPlayers(argv);
-        bb.setChanceCards(new String[]{
-                "Library"
-        });
-        bb.setTiles(new ArrayList<Tile>() {{
+        bb.setTiles(new ArrayList<Action>() {{
             add(new Start());
             add(new Stil(2,6));
             add(new Chance());

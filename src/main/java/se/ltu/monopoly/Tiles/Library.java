@@ -1,13 +1,15 @@
 package se.ltu.monopoly.Tiles;
 
+import se.ltu.monopoly.Action;
+import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
 
 /**
  * Created by erikuusitalo on 28/10/16.
  */
-public class Library implements Tile{
+public class Library implements Action{
 
-    public void doAction(Player p) {
+    public void onAction(Player p, Board b) {
         p.increaseKnowledge(8);
     }
 

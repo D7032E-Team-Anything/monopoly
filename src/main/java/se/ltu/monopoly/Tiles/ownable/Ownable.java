@@ -1,22 +1,23 @@
 package se.ltu.monopoly.Tiles.ownable;
 
+import se.ltu.monopoly.Action;
 import se.ltu.monopoly.Board;
 import se.ltu.monopoly.Player;
-import se.ltu.monopoly.Tiles.Tile;
 
 
-public class Ownable implements Tile {
+public class Ownable implements Action {
 
-    private String message = "";
-    protected Player owner;
-    protected int price, rent;
+    private String      message;
+    protected Player    owner;
+    protected int       price;
+    protected int       rent;
 
     public Ownable(int rent, int price) {
         this.price = price;
         this.rent = rent;
     }
 
-    public void doAction(Player p) {
+    public void onAction(Player p, Board b) {
 
         if (owner != null) {
 

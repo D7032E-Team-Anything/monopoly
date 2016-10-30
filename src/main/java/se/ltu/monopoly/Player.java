@@ -1,9 +1,9 @@
 package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.ownable.Ownable;
-import se.ltu.monopoly.Tiles.Tile;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Player {
 
@@ -14,7 +14,7 @@ public class Player {
 
     private boolean computer;
 
-    private ArrayList<Tile> ownedTiles = new ArrayList<Tile>();
+    private ArrayList<Ownable> ownedTiles = new ArrayList<Ownable>();
 
     private boolean stillPlaying = true;
     private boolean skipTurn;
@@ -39,7 +39,7 @@ public class Player {
 
             stillPlaying = playing;
             name = "         ";
-            ownedTiles = new ArrayList<Tile>();
+            ownedTiles = new ArrayList<Ownable>();
 
     }
 
@@ -82,17 +82,49 @@ public class Player {
 
     /**
      *
-     * @param position
+     * @param tile is the tile which the player gained without paying for it
+     *
      */
-    public void move(int position) {
+    public void gainTile(Ownable tile) {
+        ownedTiles.add(tile);
+    }
 
-        this.position += position;
+    /**
+     *
+     * @param steps
+     */
+    public void move(int steps) {
+
+        this.position += steps;
 
         if(this.position > 13) {
             this.position -= 14;
         }
 
 
+    }
+
+    public boolean ownsTile(String name){
+        for(Ownable t : ownedTiles){
+            if(t.toString().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param tileName is the tile to be removed
+     */
+    public void removeTile(String tileName){
+        Iterator<Ownable> it = ownedTiles.iterator();
+        while (it.hasNext()) {
+            Ownable tile = it.next();
+            if (tile.toString().equals(tileName)) {
+                it.remove();
+            }
+        }
     }
 
     public void moveTo(int position) {
@@ -105,6 +137,14 @@ public class Player {
 
     /**
      *
+     * @param knowledge is amount of knowledge to increase
+     */
+    public void increaseKnowledge(int knowledge) {
+        this.knowledge += knowledge;
+    }
+
+    /**
+     *
      * @param knowledge is amount of knowledge to be removed
      */
     public void decreaseKnowledge(int knowledge) {
@@ -113,10 +153,10 @@ public class Player {
 
     /**
      *
-     * @param knowledge is amount of knowledge to increase
+     * @param money is amount of money to be removed
      */
-    public void increaseKnowledge(int knowledge) {
-        this.knowledge += knowledge;
+    public void decreaseMoney(int money) {
+        this.money -= money;
     }
 
     /**
@@ -147,17 +187,6 @@ public class Player {
         return knowledge;
     }
 
-    public boolean isWin() {
-        return win;
-    }
-
-    public void win() {
-        this.win = true;
-    }
-
-    public boolean isBroke() {
-        return money <= 0;
-    }
 
     public boolean isComputer() {
         return computer;

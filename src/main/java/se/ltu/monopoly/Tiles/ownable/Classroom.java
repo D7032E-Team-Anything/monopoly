@@ -9,18 +9,18 @@ import se.ltu.monopoly.Player;
 public class Classroom extends Ownable {
 
 
-    private String roomNumber;
+    private String roomName;
     private int knowledge;
 
-    public Classroom(String roomNumber, int rent, int knowledge, int price) {
+    public Classroom(String roomName, int rent, int knowledge, int price) {
         super(rent, price);
         this.knowledge = knowledge;
-        this.roomNumber = roomNumber;
+        this.roomName = roomName;
     }
 
     @Override
-    public void doAction(Player p) {
-        super.doAction(p);
+    public void onAction(Player p, Board b) {
+        super.onAction(p,b);
         p.increaseKnowledge(this.knowledge);
 
 
@@ -28,7 +28,7 @@ public class Classroom extends Ownable {
 
     @Override
     public String toString() {
-        return roomNumber;
+        return roomName;
     }
 
 

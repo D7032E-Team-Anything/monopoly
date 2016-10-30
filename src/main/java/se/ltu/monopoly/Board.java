@@ -1,8 +1,6 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.Tiles.ownable.Ownable;
-import se.ltu.monopoly.chanceCards.ChanceCard;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,14 +14,14 @@ public class Board {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     private ArrayList<Player> players;
-    private ArrayList<Tile> tiles;
-    private ArrayList<ChanceCard> chanceCards;
+    private ArrayList<Action> tiles;
+    private ArrayList<Action> chanceCards;
     private Dice dice;
     private Gui gui;
 
     private boolean gameEnd = false;
 
-    public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, ArrayList<ChanceCard> mChanceCards, Dice dice) {
+    public Board(ArrayList<Player> mPlayers, ArrayList<Action> mTiles, ArrayList<Action> mChanceCards, Dice dice) {
         this.players = mPlayers;
         this.tiles = mTiles;
         this.chanceCards = mChanceCards;
@@ -36,7 +34,7 @@ public class Board {
         gui.printInstructions();
 
         int i = 0;
-        while (!gameEnd) {
+        while (!isGameEnd()) {
 
 
             makeMove(players.get(i));
@@ -67,8 +65,8 @@ public class Board {
 
         // Check if still playing
         if(!player.isStillPlaying()) {
-            gameEnd = isSomeonePlaying();
-            if(gameEnd) System.out.println("There are no more players, everyone lost");
+            setGameEnd(isSomeonePlaying());
+            if(isGameEnd()) System.out.println("There are no more players, everyone lost");
             return;
         }
 
@@ -94,7 +92,7 @@ public class Board {
 
         // What to buy?
         int currentPos   = player.getPosition();
-        Tile currentTile = tiles.get(currentPos);
+        Action currentTile = tiles.get(currentPos);
 
         if (currentTile instanceof Ownable) {
 
@@ -136,7 +134,7 @@ public class Board {
         System.out.println(player.getName() + "rolls a " + roll + " and lands on " + currentTile.toString());
 
         // Execute tile action
-        currentTile.doAction(player);
+        currentTile.onAction(player, this);
 
         System.out.println(currentTile.message());
 
@@ -144,21 +142,8 @@ public class Board {
         System.out.println(player.getStatus());
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
 
     private boolean isSomeonePlaying() {
         boolean someoneIsStillPlaying = false;
@@ -169,10 +154,32 @@ public class Board {
         }
         return someoneIsStillPlaying;
     }
+    public void removeOwner(String roomName){
+
+        for(Player p : players){
+            if(p.ownsTile(roomName)){
+               p.removeTile(roomName);
+                return;
+            }
+        }
+    }
+
+    // crazy fix
+    public Ownable getTile(int pos){
+        Action tile = tiles.get(pos);
+
+        if (tile instanceof Ownable){
+            return (Ownable) tile;
+        }
+        return null;
+    }
 
 
+    public boolean isGameEnd() {
+        return gameEnd;
+    }
 
-
-
-
+    public void setGameEnd(boolean gameEnd) {
+        this.gameEnd = gameEnd;
+    }
 }

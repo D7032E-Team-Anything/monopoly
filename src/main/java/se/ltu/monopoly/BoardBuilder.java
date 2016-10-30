@@ -1,8 +1,6 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.Tile;
 import se.ltu.monopoly.chanceCards.ChanceCard;
-import se.ltu.monopoly.chanceCards.ChanceCardFactory;
 
 import java.util.ArrayList;
 
@@ -13,8 +11,8 @@ public class BoardBuilder {
 
     private Dice dice;
     private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Tile> tiles = new ArrayList<Tile>();
-    private ArrayList<ChanceCard> chanceCards = new ArrayList<ChanceCard>();
+    private ArrayList<Action> tiles = new ArrayList<Action>();
+    private ArrayList<Action> chanceCards = new ArrayList<Action>();
 
     public void setDice(int sides) {
         dice = new Dice(sides);
@@ -33,27 +31,17 @@ public class BoardBuilder {
         }
     }
 
-    public void setChanceCards(String[] cards) {
+    public void setChanceCards() {
 
-        ChanceCardFactory ccf = new ChanceCardFactory();
-
-        for(int i = 0; i<cards.length; i++) {
-
-            ChanceCard chanceCard = null;
-
-            try {
-                chanceCard = ccf.getChanceCard(cards[i]);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            chanceCards.add(chanceCard);
-
-        }
+        chanceCards.add(new ChanceCard("StudyAtLibrary", new ChanceCard.StudyAtLibrary()));
+        chanceCards.add(new ChanceCard("FallenIll", new ChanceCard.FallenIll()));
+        chanceCards.add(new ChanceCard("GotanExam", new ChanceCard.GotanExam()));
+        chanceCards.add(new ChanceCard("PWNZ", new ChanceCard.PWNZ()));
+        chanceCards.add(new ChanceCard("Party", new ChanceCard.Party()));
 
     }
 
-    public void setTiles(ArrayList<Tile> tiles) {
+    public void setTiles(ArrayList<Action> tiles) {
         this.tiles = tiles;
     }
 

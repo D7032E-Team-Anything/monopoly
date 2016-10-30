@@ -1,8 +1,5 @@
 package se.ltu.monopoly.Tiles.ownable;
 
-import se.ltu.monopoly.Player;
-import se.ltu.monopoly.Tiles.Tile;
-
 /**
  * Created by erikuusitalo on 28/10/16.
  */
