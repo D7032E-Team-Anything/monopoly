@@ -1,6 +1,6 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.ownable.Ownable;
+import se.ltu.monopoly.Tiles.Ownable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,11 +9,13 @@ import java.util.ArrayList;
 
 public class Gui {
 
-    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader bufferedReader;
     private ArrayList<Player> players;
 
     public Gui(ArrayList<Player> players) {
+
         this.players = players;
+        this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     /**
@@ -25,7 +27,7 @@ public class Gui {
         boardTiles[0] = new String[] {"***********", "*  START  *", "*         *", "***********"};
         boardTiles[1] = new String[] {"**********", "  StiL   *", "         *", "**********"};
         boardTiles[2] = new String[] {"**********", " CHANCE  *", "         *", "**********"};
-        boardTiles[3] = new String[] {"**********", "  Philm  *", "         *", "**********"};
+        boardTiles[3] = new String[] {"**********", "  Film  *", "         *", "**********"};
         boardTiles[4] = new String[] {"**********", "  PARTY  *", "         *", "**********"};
 
         boardTiles[13] = new String[] {"", "*  A210   *", "*         *", "***********"}; //6 line tile
@@ -66,9 +68,9 @@ public class Gui {
                             // player 1-4 is located at the current tile being printed
                             int stars = boardTiles[printorder[i+tile]][2].replaceAll("\\s+","").length();
                             if(stars==1) {
-                                System.out.print(players.get(line-2).getName() + "*");
+                                System.out.print(players.get(line-2).getmName() + "*");
                             } else {
-                                System.out.print("*" + players.get(line-2).getName() + "*");
+                                System.out.print("*" + players.get(line-2).getmName() + "*");
                             }
                         } else { //No player is located at this tile
                             System.out.print(boardTiles[printorder[i+tile]][2]);
@@ -92,7 +94,7 @@ public class Gui {
         System.out.println("Currency: Study-time (Time is money, start with 200)");
         System.out.println("Tiles:");
         System.out.println("\tSTART: Collect 40");
-        System.out.println("\tStiL/Philm: Go to the gym/cinema [buy: 6, rent 2]");
+        System.out.println("\tStiL/Film: Go to the gym/cinema [buy: 6, rent 2]");
         System.out.println("\tCHANCE: Draw a CHANCE card");
         System.out.println("\tPARTY: Have a huge party [pay: 18, Decrease knowledge by 8]");
         System.out.println("\tA109/A117/B234Ske/E632: Attend a lecture [buy: 10, rent 3, Increase knowledge by 3]");
@@ -102,7 +104,6 @@ public class Gui {
         System.out.println("Win by collecting 200 knowlede and go to the EXAM tile. Lose by running out of study-time");
     }
 
-
     /**
      *
      * @param player
@@ -110,17 +111,17 @@ public class Gui {
      * @return return true if player wants to buy, false otherwise
      */
     public String wantToBuy(Player player, Ownable tile) {
-        System.out.print("Do you want to buy " + tile.toString() + " for " + tile.getPrice() +
-                " and rent " + tile.getRent() + "? [y/n] \nYou currently have " + player.getMoney() + " study-time\n");
+        System.out.print("Do you want to buy " + tile.getName() + " for " + tile.getPurchaseCost() +
+                " and rent " + tile.getRentCost() + "? [y/n] \nYou currently have " + player.getMoney() + " study-time\n");
         String choice = "";
         try{
             while(!((choice = bufferedReader.readLine()).equals("y") || choice.equals("n"))){
                 System.out.println("Yes [y] or No [n]");
             }
-        } catch (Exception e) {};
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return choice;
     }
-
-
 }

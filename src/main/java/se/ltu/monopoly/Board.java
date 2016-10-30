@@ -1,41 +1,40 @@
 package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.Tile;
-import se.ltu.monopoly.Tiles.ownable.Ownable;
+import se.ltu.monopoly.Tiles.Ownable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Board {
+public class Board extends Thread{
 
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader bufferedReader;
     private ArrayList<Player> players;
     private ArrayList<Tile> tiles;
     private Dice dice;
     private Gui gui;
-    private boolean gameEnd = false;
+    private boolean gameEnd;
 
     public Board(ArrayList<Player> mPlayers, ArrayList<Tile> mTiles, Dice dice) {
         this.players = mPlayers;
         this.tiles = mTiles;
         this.dice = dice;
         this.gui = new Gui(players);
+        this.bufferedReader = new BufferedReader(
+                new InputStreamReader(System.in));
     }
 
-    public void start() {
-
+    public void run() {
         gui.printInstructions();
-
         int i = 0;
-        while (!isGameEnd()) {
+        while(!isGameEnd()){
             makeMove(players.get(i));
             i++;
             if(i>=players.size()) {
                 i=0;
             }
         }
-
     }
 
 
@@ -51,26 +50,28 @@ public class Board {
         // Player skip turn
         if(player.isSkipTurn()) {
             player.skipTurn(false);
-            System.out.println(player.getName() + " skips one turn");
+            System.out.println(player.getmName() + " skips one turn");
             return;
         }
 
-        System.out.println("It is now the turn of " + player.getName());
+        System.out.println("It is now the turn of " + player.getmName());
 
         // Player character - let them press enter before their turn begins.
         if(!player.isComputer()) {
             gui.paintGameBoard();
-            System.out.println(player.getName() + "Press [enter] to continue. (study-time: "+
+            System.out.println(player.getmName() + "Press [enter] to continue. (study-time: "+
                     player.getMoney()+", knowledge: " + player.getKnowledge()+ ")");
             try{
                 bufferedReader.readLine();
-            } catch(Exception e){};
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         }
 
         // What to buy?
         int currentPos   = player.getPosition();
 
-        Tile currentTile = tiles.get(currentPos);
+        Tile currentTile = getTile(currentPos);
 
         if (currentTile instanceof Ownable) {
 
@@ -84,11 +85,11 @@ public class Board {
 
                     if (ownableTile.buyTile(player)) {
 
-                        System.out.println(player.getName() + "bought " + ownableTile.toString());
+                        System.out.println(player.getmName() + "bought " + ownableTile.getName());
 
                     } else {
 
-                        System.out.println("You can not afford " + ownableTile.toString());
+                        System.out.println("You can not afford " + ownableTile.getName());
 
                     }
 
@@ -104,13 +105,13 @@ public class Board {
         // Roll dice
         int roll = dice.roll();
         player.move(roll);
-        currentTile = tiles.get(player.getPosition());
-        System.out.println(player.getName() + "rolls a " + roll + " and lands on " + currentTile.toString());
+        currentTile = getTile(player.getPosition());
+        System.out.println(player.getmName() + "rolls a " + roll + " and lands on " + currentTile.getName());
 
         // Execute tile action
         Action currentAction = (Action) currentTile;
         currentAction.onAction(player, this);
-        System.out.println(currentAction.message());
+        System.out.println(currentAction.getMessage());
 
         // Print status of player
         System.out.println(player.getStatus());
@@ -145,7 +146,12 @@ public class Board {
     }
 
     public Tile getTile(int pos){
-        return tiles.get(pos);
+        for(Tile t : tiles){
+            if(t.getPosition() == pos){
+                return t;
+            }
+        }
+        return null;
     }
     public boolean isGameEnd() {
         return gameEnd;
@@ -153,5 +159,4 @@ public class Board {
     public void setGameEnd(boolean gameEnd) {
         this.gameEnd = gameEnd;
     }
-
 }

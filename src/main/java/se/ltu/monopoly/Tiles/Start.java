@@ -15,16 +15,11 @@ public class Start implements Action, Tile{
         this.name = name;
     }
     public void onAction(Player p, Board b) {
-        p.getPayed(40);
+        p.increaseMoney(40);
     }
 
-    public String message() {
+    public String getMessage() {
         return null;
-    }
-
-    @Override
-    public String toString() {
-        return "Start";
     }
 
     public String getName() {

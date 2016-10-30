@@ -1,13 +1,13 @@
 package se.ltu.monopoly;
 
-import se.ltu.monopoly.Tiles.ownable.Ownable;
+import se.ltu.monopoly.Tiles.Ownable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player {
 
-    private String name;
+    private String mName;
     private int position;
     private int money;
     private int knowledge;
@@ -22,7 +22,7 @@ public class Player {
 
     public Player(String name, boolean computer) {
 
-        this.name           = "   " + name + "   ";
+        this.mName = "   " + name + "   ";
         this.computer       = computer;
         this.stillPlaying   = true;
         this.ownedTiles     = new ArrayList<Ownable>();
@@ -30,23 +30,13 @@ public class Player {
     }
 
     /**
-     * Sets playing to false, removes name, clears owned tiles
+     * Sets playing to false, removes mName, clears owned tiles
      * @param playing
      */
     public void lose(boolean playing) {
-
-            stillPlaying = playing;
-            name = "         ";
-            ownedTiles = new ArrayList<Ownable>();
-
-    }
-
-    /**
-     *
-     * @param money is the amont of money to remove
-     */
-    public void getPayed(int money) {
-        this.money += money;
+        stillPlaying = playing;
+        mName = "         ";
+        ownedTiles = new ArrayList<Ownable>();
     }
 
     /**
@@ -63,7 +53,6 @@ public class Player {
 
         this.money -= pay;
         return true;
-
     }
 
     /**
@@ -73,15 +62,14 @@ public class Player {
      */
     public boolean buyTile(Ownable tile) {
 
-        if (money - tile.getPrice() < 0) {
+        if (money - tile.getPurchaseCost() < 0) {
             return false;
         }
 
         ownedTiles.add(tile);
-        this.money -= tile.getPrice();
+        this.money -= tile.getPurchaseCost();
 
         return true;
-
     }
 
     /**
@@ -92,7 +80,6 @@ public class Player {
     public void gainTile(Ownable tile) {
         ownedTiles.add(tile);
     }
-
 
     /**
      *
@@ -143,7 +130,7 @@ public class Player {
      * @return string representing the status of the player
      */
     public String getStatus() {
-        return this.name + " has " + this.money + " study-time and " + this.knowledge + " knowledge";
+        return this.mName + " has " + this.money + " study-time and " + this.knowledge + " knowledge";
     }
 
     public void increaseKnowledge(int knowledge) {
@@ -151,6 +138,9 @@ public class Player {
     }
     public void decreaseKnowledge(int knowledge) {
         this.knowledge -= knowledge;
+    }
+    public void increaseMoney(int money) {
+        this.money -= money;
     }
     public void decreaseMoney(int money) {
         this.money -= money;
@@ -175,14 +165,14 @@ public class Player {
     public int getKnowledge() {
         return knowledge;
     }
-    public String getName() {
-        return name;
-    }
     public int getPosition() {
         return position;
     }
     public int getMoney() {
         return money;
+    }
+    public String getmName() {
+        return mName;
     }
 
 

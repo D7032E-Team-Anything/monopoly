@@ -8,12 +8,9 @@ import java.util.ArrayList;
 
 public class BoardBuilder {
 
-    Board board;
-
     private Dice dice;
     private ArrayList<Player> players       = new ArrayList<Player>();
     private ArrayList<Tile> tiles           = new ArrayList<Tile>();
-    private ArrayList<Action> chanceCards   = new ArrayList<Action>();
 
     /**
      * Creates all players for the game

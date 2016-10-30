@@ -5,7 +5,7 @@ import java.util.Random;
 public class Dice {
 
 
-    private Random random = new Random();
+    private Random random;
     private int sides;
 
     /**
@@ -17,6 +17,7 @@ public class Dice {
             throw new IllegalArgumentException("Age cannot be negative.");
         }
         this.sides = sides;
+        this.random = new Random();
 
     }
 
@@ -26,5 +27,4 @@ public class Dice {
     public int roll() {
         return random.nextInt((sides - 1) + 1) + 1;
     }
-
 }

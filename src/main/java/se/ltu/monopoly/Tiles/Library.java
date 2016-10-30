@@ -9,7 +9,7 @@ public class Library implements Action, Tile{
 
     private String name;
     private String message;
-    private int position;
+    private int    position;
 
     /**
      * The Library class represent a library tile. When a player lands on the
@@ -25,16 +25,11 @@ public class Library implements Action, Tile{
 
     public void onAction(Player p, Board b) {
         p.increaseKnowledge(8);
-        message = p.getName() + " has landed in the library and got 8 of knowledge";
+        message = p.getmName() + " has landed in the library and got 8 of knowledge";
     }
 
-    public String message() {
+    public String getMessage() {
         return message;
-    }
-
-    @Override
-    public String toString() {
-        return "Library";
     }
 
     public String getName() {

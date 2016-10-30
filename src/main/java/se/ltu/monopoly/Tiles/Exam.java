@@ -8,9 +8,9 @@ import se.ltu.monopoly.Player;
 public class Exam implements Action, Tile{
 
 
+    private int position;
     private String message;
     private String name;
-    private int position;
 
 /**
  * The Exam class represent an exam tile. The player will win the game if
@@ -29,19 +29,14 @@ public class Exam implements Action, Tile{
 
         if(p.getKnowledge() >= 200) {
             b.setGameEnd(true);
-            message = p.getName() + " PASSED THE EXAM AND WINS THE GAME! CONGRATULATIONS!";
+            message = p.getmName() + " PASSED THE EXAM AND WINS THE GAME! CONGRATULATIONS!";
         }
         p.skipTurn(true);
-        message = p.getName() + " had not studied enough for the exam and have to take a re-exam. Skip one turn";
+        message = p.getmName() + " had not studied enough for the exam and have to take a re-exam. Skip one turn";
     }
 
-    public String message() {
+    public String getMessage() {
         return message;
-    }
-
-    @Override
-    public String toString() {
-        return "Exam";
     }
 
     public String getName() {

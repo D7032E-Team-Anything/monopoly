@@ -1,15 +1,11 @@
 package se.ltu.monopoly;
 
 import se.ltu.monopoly.Tiles.*;
-import se.ltu.monopoly.Tiles.ownable.Classroom;
-import se.ltu.monopoly.Tiles.ownable.Philm;
-import se.ltu.monopoly.Tiles.ownable.Stil;
+import se.ltu.monopoly.Tiles.Ownable;
 
 import java.util.ArrayList;
 
-/**
- * Created by haidar on 2016-10-27.
- */
+
 public class Main {
 
     /**
@@ -25,32 +21,29 @@ public class Main {
             System.exit(0);
         }
 
-
         // board settings
         BoardBuilder bb = new BoardBuilder();
         bb.setPlayers(argv);
         bb.setTiles(new ArrayList<Tile>() {{
-            add(new Start       (0, "Start"));
-            add(new Stil        (1, "Stil"   ,2,6));
-            add(new Chance      (2, "Chance"));
-            add(new Philm       (3, "Philm"  ,2,6));
-            add(new Party       (4, "Party"  ,8, 18));
-            add(new Classroom   (5, "A109", 3, 3, 10));
-            add(new Classroom   (6, "A117", 3, 3, 10));
-            add(new Library     (7, "Library"));
-            add(new Classroom   (8, "B234Ske", 3, 3, 10));
-            add(new Chance      (9, "Chance"));
-            add(new Classroom   (10,"E632", 3, 3, 10));
-            add(new Exam        (11,"Exam"));
-            add(new Classroom   (12,"A209", 5, 4, 20));
-            add(new Classroom   (13,"A210", 5, 4, 20));
+            add(new Start   (0, "Start"));
+            add(new Chance  (2, "Chance"));
+            add(new Party   (4, "Party",8, 18));
+            add(new Library (7, "Library"));
+            add(new Chance  (9, "Chance"));
+            add(new Exam    (11,"Exam"));
+            add(new Ownable (1, "Stil"      ,2 , 6 ,0));
+            add(new Ownable (3, "Film"      ,2 , 6 ,0));
+            add(new Ownable (5, "A109"      ,10, 3, 3));
+            add(new Ownable (6, "A117"      ,10, 3, 3));
+            add(new Ownable (8, "B234Ske"   ,10, 3, 3));
+            add(new Ownable (10,"E632"      ,10, 3, 3));
+            add(new Ownable (12,"A209"      ,20, 5, 4));
+            add(new Ownable (13,"A210"      ,20, 5, 4));
         }});
         bb.setDice(6);
 
         // start board
-        bb.createBoard().start();
-
-
+        Board b = bb.createBoard();
+        b.start();
     }
-
 }
